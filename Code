@@ -1,0 +1,22 @@
+for 3rd task
+
+//        List<Flight> checkedFlights = new ArrayList<>();
+//
+//        for (Flight f : flights) {
+//            if (f.getSegments().size() / 2 > 0) {
+//                int last = f.getSegments().size() - 1;
+//                //Find the whole period
+//                long period = ChronoUnit.HOURS.between(f.getSegments().get(0).getDepartureDate(),
+//                        f.getSegments().get(last).getArrivalDate());
+//                for (Segment s : f.getSegments()) {
+//                    //Find the whole flight period
+//                    long temp = Math.abs(ChronoUnit.HOURS.between(s.getArrivalDate(), s.getDepartureDate()));
+//                    //Find the landing period
+//                    period -= temp;
+//                }
+//                if (!(period >= 2)) {
+//                    checkedFlights.add(f);
+//                }
+//            } else checkedFlights.add(f);
+//        }
+//        return checkedFlights;

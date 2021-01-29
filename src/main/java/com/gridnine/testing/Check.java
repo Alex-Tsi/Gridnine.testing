@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,23 +44,19 @@ public class Check implements Selection {
      */
     @Override
     public List<Flight> differentLandTime() {
-        List<Flight> checkedFlights = new ArrayList<>();
-        long period;
-        for (Flight f :
-                flights) {
-            if (f.getSegments().size() / 2 > 0) {
-                period = ChronoUnit.HOURS.between(f.getSegments().get(0).getDepartureDate(),
-                        f.getSegments().get(f.getSegments().size() - 1).getArrivalDate());
-                for (Segment s : f.getSegments()) {
-                    long temp = Math.abs(ChronoUnit.HOURS.between(s.getArrivalDate(), s.getDepartureDate()));
-                    period -= temp;
-                }
-                if (period >= 2) {
-                    checkedFlights.add(f);
-                }
-            }
-        }
-
-        return checkedFlights;
+        return flights.stream().filter(
+                flight -> !(flight.getSegments().size() > 1
+                        &&
+                        flight.getSegments().stream().reduce(
+                                ChronoUnit.HOURS.between(
+                                        flight.getSegments().get(0).getDepartureDate(),
+                                        flight.getSegments().get(flight.getSegments().size() - 1).getArrivalDate()
+                                ),
+                                (period, s) -> {
+                                    long temp = Math.abs(ChronoUnit.HOURS.between(s.getArrivalDate(), s.getDepartureDate()));
+                                    return period - temp;
+                                },
+                                Long::sum
+                        ) > 2)).collect(Collectors.toList());
     }
 }
