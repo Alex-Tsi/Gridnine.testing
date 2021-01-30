@@ -12,20 +12,20 @@ public class Main {
         System.out.println("--------------------------------------");
 
         Selection check = new Check(flights);
+        
+        List<Flight> beforeDepartureCurrent = check.beforeCurrentTime();        //1 пункт
+        List<Flight> arrivalBeforeDeparture = check.arrivalBeforeDeparture();   //2 пункт
+        List<Flight> differentLandTime = check.differentLandTime();             //3 пункт
 
-        List<Flight> beforeDepartureCurrent = check.beforeCurrentTime();
-        List<Flight> arrivalBeforeDeparture = check.arrivalBeforeDeparture();
-        List<Flight> differentLandTime = check.differentLandTime();
-
-        System.out.println("Вылет до текущего момента времени");
+        System.out.println("Исключены перелёты: вылеты до текущего момента времени");
         beforeDepartureCurrent.forEach(System.out::println);
         System.out.println("--------------------------------------");
 
-        System.out.println("Сегменты с датой прилёта раньше даты вылета");
+        System.out.println("Исключены перелёты: с датой прилёта раньше даты вылета");
         arrivalBeforeDeparture.forEach(System.out::println);
         System.out.println("--------------------------------------");
 
-        System.out.println("Общее время на земле превышает 2 часа");
+        System.out.println("Исключены перелёты: общее время на земле превышает 2 часа");
         differentLandTime.forEach(System.out::println);
     }
 }
