@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Check implements Selection {
+public class SelectionImpl implements Selection {
 
     private List<Flight> flights;
 

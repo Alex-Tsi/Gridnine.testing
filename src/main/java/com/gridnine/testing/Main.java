@@ -11,7 +11,7 @@ public class Main {
         flights.forEach(System.out::println);
         System.out.println("--------------------------------------");
 
-        Selection check = new Check(flights);
+        Selection check = new SelectionImpl(flights);
         
         List<Flight> beforeDepartureCurrent = check.beforeCurrentTime();        //1 пункт
         List<Flight> arrivalBeforeDeparture = check.arrivalBeforeDeparture();   //2 пункт
